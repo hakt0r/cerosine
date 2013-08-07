@@ -1,20 +1,20 @@
 
 class UIDialog
-  @container : null
+  @parent : null
   @count : 0
   @byId  : {}
   button : {}
   constructor : (opts={}) ->
-    { @container, @id, @init, show, head, foot, body } = opts
-    @container = UIDialog.container    unless @container?
+    { @parent, @id, @init, show, head, foot, body } = opts
+    @parent = UIDialog.parent    unless @parent?
     @id = "dialog-#{UIDialog.count++}" unless @id?
-    @container.append """
+    @parent.append """
       <div class="dialog" id="#{@id}">
         <div class="dlg-head"></div>
         <div class="dlg-body"></div>
         <div class="dlg-foot"></div>
       </div>"""
-    @query = $("##{@id}")
+    @query = @$ = $("##{@id}")
     for section, v of {head:head,body:body,foot:foot} when v?
       @[section] = $("##{@id} .dlg-#{section}")
       @[section].append v.html if v.html?
@@ -27,12 +27,12 @@ class UIDialog
   hide : -> @show no
   show : (show=yes) ->
     state = if show then 'block' else 'none'
-    @container.css 'display', state
+    @parent.css 'display', state
     @query.css     'display', state
 
 $(document).ready ->
   $('body').append """<div class="dialog-container"></div>"""
-  UIDialog.container = $ 'body > .dialog-container'
+  UIDialog.parent = $ 'body > .dialog-container'
   true
 
 window.UIDialog = UIDialog

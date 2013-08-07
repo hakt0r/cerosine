@@ -1,13 +1,67 @@
-## cerosine - coffee-script inspired UI kit for html5 
+## cerosine - coffee-script inspired UI kit for html5 and jQuery
 
 ### Installation
-    $ sudo npm cerosine (TODO: publish when ready ;)
-    $ sudo npm install -g git://github.com/hakt0r/cerosine.git
+    $ sudo npm install cerosine (TODO: publish when ready ;)
+    $ sudo npm install git://github.com/hakt0r/cerosine.git
 
-### Coffee Usage:
-
+### Documentation
+#### Example
     s = new UIButton
-     ...
+    parent : '#toolbar'
+    click  : ->
+      s.$.css.addClass "active"
+      d = new UIDialog
+        parent : "#dialogs"
+        head : html : "<h1>header</h1>"
+        body : html : """
+            <div>#{Math.random()*100}</div>
+            <div>#{Math.random()*100}</div>
+            <div>#{Math.random()*100}</div>
+          """
+        init : ->
+          d.$.attr 'is-dialog', 'yes'
+
+#### UIDialog options
+##### Functions
+  * show : show the dialog
+  * hide : hide the dialog
+##### Options
+  * parent @ string (dom-query)
+  * id @ string
+  * init @ function
+  * show @ bool
+  * head, body, foot :
+    * tml @ string
+    * uttons @ { UIButton }
+
+#### UIButton
+##### Functions
+  * show : show the button
+  * hide : hide the button
+##### Options
+  * parent @ string (dom-query)
+  * id @ string
+  * hide @ bool
+  * class @ string
+  * title @ string
+  * tooltip @ string
+  * init @ function
+  * click @ function
+
+#### UITask options
+##### Functions
+  * show : show the notification
+  * hide : hide the notification
+  * progress : update the progress bar
+    * value @ int (0-100)
+    * status @ string, optional
+  * hide : hide the notification
+##### Options
+  * parent @ string (dom-query)
+  * id @ string
+  * title @ string
+  * status @ string
+  * progress @ int (0-100)
 
 ### Copyrights
   * c) 2013 Sebastian Glaser <anx@ulzq.de>

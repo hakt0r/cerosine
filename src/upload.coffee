@@ -1,7 +1,7 @@
-class FileUpload extends Task
+
+class FileUpload extends UITask
 
   constructor : (file, meta) ->
-
     super
       title : "Upload: #{file.name}"
       progress : yes
