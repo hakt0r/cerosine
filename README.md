@@ -22,9 +22,11 @@
           d.$.attr 'is-dialog', 'yes'
 
 #### UIDialog options
+
 ##### Functions
   * show : show the dialog
   * hide : hide the dialog
+
 ##### Options
   * parent @ string (dom-query)
   * id @ string
@@ -35,9 +37,11 @@
     * uttons @ { UIButton }
 
 #### UIButton
+
 ##### Functions
   * show : show the button
   * hide : hide the button
+
 ##### Options
   * parent @ string (dom-query)
   * id @ string
@@ -49,13 +53,15 @@
   * click @ function
 
 #### UITask options
+
 ##### Functions
   * show : show the notification
   * hide : hide the notification
   * progress : update the progress bar
     * value @ int (0-100)
     * status @ string, optional
-  * hide : hide the notification
+  * done : task has finished
+
 ##### Options
   * parent @ string (dom-query)
   * id @ string
