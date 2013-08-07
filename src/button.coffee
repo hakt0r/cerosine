@@ -13,7 +13,7 @@ class UIButton
     @query.on("click", => @click.apply @, arguments) if @click?
     UIButton.byId[@id] = this
     @init() if @init?
-    if @tooltip?
+    if $.tooltip? and @tooltip?
       @query.attr('title',@tooltip)
       @query.tooltip()
   show : => @query.show()

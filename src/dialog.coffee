@@ -1,4 +1,6 @@
+
 class UIDialog
+  @container : null
   @count : 0
   @byId  : {}
   button : {}
@@ -27,5 +29,10 @@ class UIDialog
     state = if show then 'block' else 'none'
     @container.css 'display', state
     @query.css     'display', state
+
+$(document).ready ->
+  $('body').append """<div class="dialog-container"></div>"""
+  UIDialog.container = $ 'body > .dialog-container'
+  true
 
 window.UIDialog = UIDialog

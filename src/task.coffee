@@ -1,13 +1,22 @@
+
 class Task
+  @container  : null
+
   constructor : (opts={}) ->
     { @parent, @id, @title, progress } = opts
+    @parent = Task.container unless @parent?
     @parent = $(@parent) if typeof @parent is "string"
-    console.log @parent.append """
+    @parent.append """
       <div class="task">
         <div class="progress"></div>
         <h4>#{@title}</h4>
+        <button class="close click">close</button>
       </div>"""
     @query = @parent.find ".task"
+
+    @close = @query.find "button.close"
+    @close.on 'click', =>
+      @query.css "display", "none"
 
     for call in ['pause','cancel','resume']
       if opts[call]?
@@ -17,9 +26,16 @@ class Task
 
     @pbar = @query.find ".progress"
     @tbar = @query.find "h4"
+
   progress : (v,k) ->
     @tbar.html @title + ' @' + k
-    @pbar.css "width",''+v+'%'
+    @pbar.css "width",'' + Math.min(100,v) + '%'
+
   done : -> @pbar.css 'background','green'
+
+$(document).ready ->
+  $('body').append """<div class="task-container noselect noclick"></div>"""
+  Task.container = $ 'body > .task-container'
+  true
 
 window.Task = Task
