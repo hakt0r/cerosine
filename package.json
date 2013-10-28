@@ -29,9 +29,7 @@
     "url": "https://github.com/hakt0r/cerosine/issues"
   },
   "dependencies": {
-    "cheerio": "~0.12.1",
     "jjquery": "~2.0.2",
-    "jquery": "~1.8.3",
     "pty.js": "~0.2.3",
     "ws": "~0.4.31",
     "http-server": "~0.5.5"
