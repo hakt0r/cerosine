@@ -273,39 +273,36 @@ _api.plugin 'CForm',
 ###
   CNotification
 ###
-
-class CNotification
-  className : 'CNotification'
-  start   : null
+_api.plugin 'CNotification',
+  count : 0
+  start : null
   timeout : null
-  @count  : 0
-
-  @init   : ->
-    $('body').append """<div id="notification-container" style="pointer-events:none;position:fixed;top:0px;right:0px;bottom:0px;width:33%"></div>"""
-    @container = $("#notification-container")
-
-  constructor : (opts={}) ->
-    { @start, @timeout, @text, @desc, @id } = opts
-    @start = Date.now().getTime()/1000 unless @?
-    @timeout = 2 unless @timeout?
-    @text = i19 @text if i19?
-    @desc = i19 @desc if i19?
-    @id = CNotification.count++ unless @id
-    @domid = "notification-#{@id}"
-    CNotification.container.append """
-      <div class="notification" id="#{@domid}" style="pointer-events:initial">
-        <h2>#{@text}</h2>
-      </div>"""
-    @query = CNotification.container.find '#'+@domid
-    @query.append """<span class="desc">#{@desc}</span>""" if @desc?
-    @query.on 'mouseover',  @wait
-    @query.on 'mouseleave', @reset
-    @reset()
-  wait : => @reset yes
-  reset : (only=false)=>
-    clearTimeout @timer if @timer?
-    @timer = setTimeout @destroy, 1000 * @timeout unless only is true
-  destroy : => @query.fadeOut => @query.replaceWith('')
+  fncs :
+    init : ->
+      $('body').append """<div id="notification-container" style="pointer-events:none;position:fixed;top:0px;right:0px;bottom:0px;width:33%"></div>"""
+      @container = $("#notification-container")
+    constructor : (opts={}) ->
+      { @start, @timeout, @text, @desc, @id } = opts
+      @start = Date.now().getTime()/1000 unless @?
+      @timeout = 2 unless @timeout?
+      @text = i19 @text if i19?
+      @desc = i19 @desc if i19?
+      @id = CNotification.count++ unless @id
+      @domid = "notification-#{@id}"
+      CNotification.container.append """
+        <div class="notification" id="#{@domid}" style="pointer-events:initial">
+          <h2>#{@text}</h2>
+        </div>"""
+      @query = CNotification.container.find '#'+@domid
+      @query.append """<span class="desc">#{@desc}</span>""" if @desc?
+      @query.on 'mouseover',  @wait
+      @query.on 'mouseleave', @reset
+      @reset()
+    wait : => @reset yes
+    reset : (only=false)=>
+      clearTimeout @timer if @timer?
+      @timer = setTimeout @destroy, 1000 * @timeout unless only is true
+    destroy : => @query.fadeOut => @query.replaceWith('')
 
 # if window?
 #   $.ready ->
