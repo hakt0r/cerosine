@@ -1,5 +1,5 @@
 require 'coffee-script'
-htx        = require 'htx'
+# htx        = require 'htx'
 util       = require 'util'
 fs         = require 'fs'
 http       = require 'http'
