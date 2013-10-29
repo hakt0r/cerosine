@@ -1,7 +1,7 @@
 PATH := ./node_modules/.bin:${PATH}
 
 build:
-	coffee -bco lib src/*.coffee
+	npm run-script prepublish
 
 all: clean build
 
